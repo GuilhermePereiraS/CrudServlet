@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+ul {
+	list-style-type: none;
+	
+	
+}
+
+li {
+	padding: 20px;
+	font-size: 25px;
+}
+
