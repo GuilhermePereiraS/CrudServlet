@@ -15,36 +15,36 @@
   </welcome-file-list>
   
   <servlet>
-  	<servlet-name>Adiciona</servlet-name>
+  	<servlet-name>ServletAdiciona</servlet-name>
   	<servlet-class>cba.ifmt.servlets.AdicionaServlet</servlet-class>
   </servlet>
     <servlet>
-  	<servlet-name>Consulta</servlet-name>
+  	<servlet-name>ServletConsulta</servlet-name>
   	<servlet-class>cba.ifmt.servlets.ConsultaServlet</servlet-class>
   </servlet>
     <servlet>
-  	<servlet-name>Edita</servlet-name>
+  	<servlet-name>ServletEdita</servlet-name>
   	<servlet-class>cba.ifmt.servlets.EditaServlet</servlet-class>
   </servlet>
     <servlet>
-  	<servlet-name>Deleta</servlet-name>
+  	<servlet-name>ServletDeleta</servlet-name>
   	<servlet-class>cba.ifmt.servlets.DeletaServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-  	<servlet-name>Adiciona</servlet-name>
+  	<servlet-name>ServletAdiciona</servlet-name>
   	<url-pattern>/adiciona</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
-  	<servlet-name>Consulta</servlet-name>
+  	<servlet-name>ServletConsulta</servlet-name>
   	<url-pattern>/consulta</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
-  	<servlet-name>Edita</servlet-name>
+  	<servlet-name>ServletEdita</servlet-name>
   	<url-pattern>/edita</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
-  	<servlet-name>Deleta</servlet-name>
+  	<servlet-name>ServletDeleta</servlet-name>
   	<url-pattern>/deleta</url-pattern>
   </servlet-mapping>
   
