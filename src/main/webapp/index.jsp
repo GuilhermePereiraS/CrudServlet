@@ -9,7 +9,7 @@
 	<div class="container">
 		<ul>
 			<li><a href="enviaMunicipios">Adicionar usuário</a></li>
-			<li><a href="editaForm.jsp">Editar usuário</a></li>
+			<li><a href="procura">Editar usuário</a></li>
 			<li><a href="consulta">Consultar usuário</a></li>
 			<li><a href="deletaForm.jsp">Deletar usuário</a></li>
 		</ul>

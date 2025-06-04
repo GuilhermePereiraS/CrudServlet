@@ -25,8 +25,8 @@
   </servlet>
   
   <servlet>
-  	<servlet-name>ServletEdita</servlet-name>
-  	<servlet-class>cba.ifmt.servlets.EditaServlet</servlet-class>
+  	<servlet-name>ServletProcura</servlet-name>
+  	<servlet-class>cba.ifmt.servlets.ProcuraUsuarioServlet</servlet-class>
   </servlet>
   
   <servlet>
@@ -37,6 +37,11 @@
     <servlet>
   	<servlet-name>EnviaMunicipiosServlet</servlet-name>
   	<servlet-class>cba.ifmt.servlets.EnviaMunicipiosServlet</servlet-class>
+  </servlet>
+  
+      <servlet>
+  	<servlet-name>ServletAtualiza</servlet-name>
+  	<servlet-class>cba.ifmt.servlets.AtualizaUsuarioServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -52,12 +57,17 @@
   	<url-pattern>/consulta</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
-  	<servlet-name>ServletEdita</servlet-name>
-  	<url-pattern>/edita</url-pattern>
+  	<servlet-name>ServletProcura</servlet-name>
+  	<url-pattern>/procura</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
   	<servlet-name>ServletDeleta</servlet-name>
   	<url-pattern>/deleta</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ServletAtualiza</servlet-name>
+  	<url-pattern>/atualiza</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

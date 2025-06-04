@@ -17,6 +17,28 @@ public class UsuarioDao {
 	PreparedStatement pStmt = null;
 	Statement stmt = null;
 	
+	
+	public void deletarUsuarioNoDb(Usuario usuario) {
+		try {
+			Class.forName("org.postgresql.Driver");
+			conexao = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/dbServlet",
+					"postgres",
+					"guigui2006@"
+					);
+			String sql = "DELETE FROM usuarios WHERE id = ?";
+			pStmt = conexao.prepareStatement(sql);
+			pStmt.setInt(1, usuario.getId());
+			pStmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void adicionarUsuarioNoDb(Usuario usuario) throws SQLException {
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -26,11 +48,11 @@ public class UsuarioDao {
 					"guigui2006@"
 					);
 			
-			String sql = "CREATE TABLE IF NOT EXISTS usuarios (id SERIAL PRIMARY KEY, nome VARCHAR(100), cpf VARCHAR(100),email VARCHAR(100), municipio_id INT REFERENCES municipios(id))" ;
+			String sql = "CREATE TABLE IF NOT EXISTS usuarios (id SERIAL PRIMARY KEY, nome VARCHAR(100), cpf VARCHAR(100),email VARCHAR(100), municipio_id INT REFERENCES municipios(id))";
 			stmt = conexao.createStatement();
 			stmt.execute(sql);
 			
-			sql = "INSERT INTO usuarios (nome,email,cpf,municipio_id) value (?,?,?,?)";
+			sql = "INSERT INTO usuarios (nome,email,cpf,municipio_id) values (?,?,?,?)";
 			
 			pStmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
@@ -64,36 +86,41 @@ public class UsuarioDao {
 		Connection conexao = null;
 		PreparedStatement pStmt = null;
 		
-		try {
-			Class.forName("org.postgresql.Driver");
-			conexao = DriverManager.getConnection(
-					"jbdc:postgresql://localhost:5432/dbServlet", 
-					"postgres", 
-					"postgres"
-					);
-			String sql = "SELECT * FROM usuarios u WHERE u.nome = " + "'" + nome + "'";
-			pStmt = conexao.prepareStatement(sql);
-			ResultSet rs = pStmt.executeQuery();
+			try {
+				Class.forName("org.postgresql.Driver");
+				conexao = DriverManager.getConnection(
+						"jdbc:postgresql://localhost:5432/dbServlet", 
+						"postgres", 
+						"guigui2006@"
+						);
+				String sql = "SELECT * FROM usuarios u WHERE u.nome = ?";
+				pStmt = conexao.prepareStatement(sql);
+				pStmt.setString(1,nome);
+				ResultSet rs = pStmt.executeQuery();
 			
-			MunicipioDao mDao = new MunicipioDao();
-				usuario.setId(rs.getInt("id"));
-				usuario.setNome(rs.getString("nome"));
-				usuario.setEmail(rs.getString("email"));
-				usuario.setCpf(rs.getString("cpf"));
-				Municipio municipio = new Municipio();
-				
-				for (Municipio m : mDao.listaMunicipio()) {
-					if (m.getNome().equals(rs.getString("municipio"))) {
-						municipio = m;
+				if (rs.next()) {
+					MunicipioDao mDao = new MunicipioDao();
+					usuario.setId(rs.getInt("id"));
+					usuario.setNome(rs.getString("nome"));
+					usuario.setEmail(rs.getString("email"));
+					usuario.setCpf(rs.getString("cpf"));
+					Municipio municipio = new Municipio();
+					
+					for (Municipio m : mDao.listaMunicipio()) {
+						if (m.getId() == rs.getInt("municipio_id")) {
+							municipio = m;
+						}
 					}
+					
+					usuario.setMunicipio(municipio);
+					
 				}
-				
-				usuario.setMunicipio(municipio);
 				
 		} catch (ClassNotFoundException e) {
 			System.err.println("Deu ruim com o driver sql: " + e.getMessage());
 		} catch (SQLException e) {
 			System.err.println("Deu ruim com a conexao com o db sql: " + e.getMessage());
+			e.printStackTrace();
 		} finally {
 			 if (!conexao.isClosed()) {
 				conexao.close();
@@ -113,17 +140,17 @@ public class UsuarioDao {
 		try {
 			Class.forName("org.postgresql.Driver");
 			conexao = DriverManager.getConnection(
-					"jbdc:postgresql://localhost:5432/dbServlet", 
+					"jdbc:postgresql://localhost:5432/dbServlet", 
 					"postgres", 
-					"postgres"
+					"guigui2006@"
 					);
-			String sql = "UPDATE usuarios SET nome=?, email=?, cpf=?, municipio=? WHERE  id=?";
+			String sql = "UPDATE usuarios SET nome=?, cpf=?, email=?, municipio_id=? WHERE  id=?";
 			pStmt = conexao.prepareStatement(sql);
 			
 			pStmt.setString(1, u.getNome());
 			pStmt.setString(2, u.getEmail());
 			pStmt.setString(3, u.getCpf());
-			pStmt.setString(4, u.getMunicipio().getNome());
+			pStmt.setInt(4, u.getMunicipio().getId());
 			pStmt.setInt(5,u.getId());
 			
 			pStmt.executeUpdate();
@@ -152,9 +179,9 @@ public class UsuarioDao {
 		try {
 			Class.forName("org.postgresql.Driver");
 			conexao = DriverManager.getConnection(
-					"jbdc:postgresql://localhost:5432/dbServlet", 
+					"jdbc:postgresql://localhost:5432/dbServlet", 
 					"postgres", 
-					"postgres"
+					"guigui2006@"
 					);
 			String sql = "SELECT * FROM usuarios";
 			pStmt = conexao.prepareStatement(sql);
@@ -171,7 +198,7 @@ public class UsuarioDao {
 				Municipio municipio = new Municipio();
 				
 				for (Municipio m : mDao.listaMunicipio()) {
-					if (m.getNome().equals(rs.getString("municipio"))) {
+					if (m.getId() == rs.getInt("municipio_id")) {
 						municipio = m;
 					}
 				}
@@ -188,12 +215,16 @@ public class UsuarioDao {
 			System.err.println("Deu ruim com o driver sql: " + e.getMessage());
 		} catch (SQLException e) {
 			System.err.println("Deu ruim com a conexao com o db sql: " + e.getMessage());
+			e.printStackTrace();
 		} finally {
-			 if (!conexao.isClosed()) {
-				conexao.close();
-			}
-			if (!pStmt.isClosed()) {
-				pStmt.close();
+			if (conexao != null) {
+				if (!conexao.isClosed()) {
+					conexao.close();
+				}
+			} if (pStmt != null) {
+				if (!pStmt.isClosed()) {
+					pStmt.close();
+				}
 			}
 		}
 		return lista;
