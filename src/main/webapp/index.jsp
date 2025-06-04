@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>CRUD SERVLET/JSP</title>
@@ -7,10 +8,10 @@
 <body>
 	<div class="container">
 		<ul>
-		<li><a href="adiciona">Adicionar usuário</a></li>
-		<li><a href="edita">Editar usuário</a></li>
-		<li><a href="consulta">Consultar usuário</a></li>
-		<li><a href="deleta">Deletar usuário</a></li>
+			<li><a href="enviaMunicipios">Adicionar usuário</a></li>
+			<li><a href="editaForm.jsp">Editar usuário</a></li>
+			<li><a href="consulta">Consultar usuário</a></li>
+			<li><a href="deletaForm.jsp">Deletar usuário</a></li>
 		</ul>
 	</div>
 </body>

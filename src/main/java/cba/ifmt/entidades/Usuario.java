@@ -2,10 +2,17 @@ package cba.ifmt.entidades;
 
 public class Usuario {
 	private int id;
+	private String nome;
 	private String email;
 	private String cpf;
 	private Municipio municipio;
 	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
 	public int getId() {
 		return id;
