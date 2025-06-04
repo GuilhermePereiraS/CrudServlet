@@ -14,8 +14,8 @@ import cba.ifmt.entidades.Usuario;
 
 public class UsuarioDao {
 	Connection conexao = null;
-	PreparedStatement stmt = null;
-	
+	PreparedStatement pStmt = null;
+	Statement stmt = null;
 	
 	public void adicionarUsuarioNoDb(Usuario usuario) throws SQLException {
 		try {
@@ -23,18 +23,24 @@ public class UsuarioDao {
 			conexao = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/dbServlet",
 					"postgres",
-					"postgres"
+					"guigui2006@"
 					);
-			String sql = "INSERT INTO usuarios (nome,email,cpf,municipio) value (?,?,?,?)";
 			
-			stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			String sql = "CREATE TABLE IF NOT EXISTS usuarios (id SERIAL PRIMARY KEY, nome VARCHAR(100), cpf VARCHAR(100),email VARCHAR(100), municipio_id INT REFERENCES municipios(id))" ;
+			stmt = conexao.createStatement();
+			stmt.execute(sql);
 			
-			stmt.setString(1, usuario.getNome());
-			stmt.setString(2, usuario.getEmail());
-			stmt.setString(3, usuario.getCpf());
-			stmt.setString(4, usuario.getMunicipio().getNome());
+			sql = "INSERT INTO usuarios (nome,email,cpf,municipio_id) value (?,?,?,?)";
 			
-			stmt.executeUpdate();
+			pStmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			pStmt.setString(1, usuario.getNome());
+			pStmt.setString(2, usuario.getEmail());
+			pStmt.setString(3, usuario.getCpf());
+			pStmt.setInt(4, usuario.getMunicipio().getId());
+			
+			pStmt.executeUpdate();
+			
 			System.out.println("Usuario adicionado ao banco de dados com sucesso");
 		} catch (ClassNotFoundException e) {
 			System.err.println("Deu ruim com o driver sql: " + e.getMessage());
@@ -43,6 +49,9 @@ public class UsuarioDao {
 		} finally {
 			if (!conexao.isClosed()) {
 				conexao.close();
+			}
+			if (!pStmt.isClosed()) {
+				pStmt.close();
 			}
 			if (!stmt.isClosed()) {
 				stmt.close();
@@ -53,7 +62,7 @@ public class UsuarioDao {
 	public Usuario consultarUsuario(String nome) throws SQLException {
 		Usuario usuario = new Usuario();
 		Connection conexao = null;
-		PreparedStatement stmt = null;
+		PreparedStatement pStmt = null;
 		
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -63,8 +72,8 @@ public class UsuarioDao {
 					"postgres"
 					);
 			String sql = "SELECT * FROM usuarios u WHERE u.nome = " + "'" + nome + "'";
-			stmt = conexao.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
+			pStmt = conexao.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
 			
 			MunicipioDao mDao = new MunicipioDao();
 				usuario.setId(rs.getInt("id"));
@@ -89,8 +98,8 @@ public class UsuarioDao {
 			 if (!conexao.isClosed()) {
 				conexao.close();
 			}
-			if (!stmt.isClosed()) {
-				stmt.close();
+			if (!pStmt.isClosed()) {
+				pStmt.close();
 			}
 		}
 		return usuario;
@@ -99,7 +108,7 @@ public class UsuarioDao {
 	
 	public void editarUsuario(Usuario u) throws SQLException {
 		Connection conexao = null;
-		PreparedStatement stmt = null;
+		PreparedStatement pStmt = null;
 		
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -109,15 +118,15 @@ public class UsuarioDao {
 					"postgres"
 					);
 			String sql = "UPDATE usuarios SET nome=?, email=?, cpf=?, municipio=? WHERE  id=?";
-			stmt = conexao.prepareStatement(sql);
+			pStmt = conexao.prepareStatement(sql);
 			
-			stmt.setString(1, u.getNome());
-			stmt.setString(2, u.getEmail());
-			stmt.setString(3, u.getCpf());
-			stmt.setString(4, u.getMunicipio().getNome());
-			stmt.setInt(5,u.getId());
+			pStmt.setString(1, u.getNome());
+			pStmt.setString(2, u.getEmail());
+			pStmt.setString(3, u.getCpf());
+			pStmt.setString(4, u.getMunicipio().getNome());
+			pStmt.setInt(5,u.getId());
 			
-			stmt.executeUpdate();
+			pStmt.executeUpdate();
 			
 			
 				
@@ -129,8 +138,8 @@ public class UsuarioDao {
 			 if (!conexao.isClosed()) {
 				conexao.close();
 			}
-			if (!stmt.isClosed()) {
-				stmt.close();
+			if (!pStmt.isClosed()) {
+				pStmt.close();
 			}
 		}
 	} 
@@ -138,7 +147,7 @@ public class UsuarioDao {
 	public List<Usuario> listarTodos() throws SQLException {
 		List<Usuario> lista = new ArrayList();
 		Connection conexao = null;
-		PreparedStatement stmt = null;
+		PreparedStatement pStmt = null;
 		
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -148,8 +157,8 @@ public class UsuarioDao {
 					"postgres"
 					);
 			String sql = "SELECT * FROM usuarios";
-			stmt = conexao.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
+			pStmt = conexao.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
 			
 			MunicipioDao mDao = new MunicipioDao();
 			
@@ -183,8 +192,8 @@ public class UsuarioDao {
 			 if (!conexao.isClosed()) {
 				conexao.close();
 			}
-			if (!stmt.isClosed()) {
-				stmt.close();
+			if (!pStmt.isClosed()) {
+				pStmt.close();
 			}
 		}
 		return lista;

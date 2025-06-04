@@ -9,26 +9,26 @@ import java.util.List;
 import cba.ifmt.entidades.Municipio;
 
 public class MunicipioDao {
-	//Não posso criar um metodo para adicionar um municipio pelo dao por que não quero que um usuario possa adicionar um municipio no front-end, e não quero um textao com municipios no dao 
 	
 	
 	public List<Municipio> listaMunicipio() throws SQLException {
 		List<Municipio> lista = new ArrayList();
 
 		Connection conexao = null;
-		PreparedStatement stmt = null;
+		PreparedStatement pStmt = null;
 		
 		try {
 			Class.forName("org.postgresql.Driver");
 		conexao = DriverManager.getConnection(
-				"jbdc:postgresql://localhost:5432/dbServlet", //url
-				"postgres", //usuario
-				"postgres" //senha
+				"jdbc:postgresql://localhost:5432/dbServlet",
+				"postgres",
+				"guigui2006@"
 				);
 		
+		
 		String sql = "SELECT * FROM municipios";
-		stmt = conexao.prepareStatement(sql);
-		ResultSet rs = stmt.executeQuery();
+		pStmt = conexao.prepareStatement(sql);
+		ResultSet rs = pStmt.executeQuery();
 		
 		while (rs.next()) {
 			Municipio municipio = new Municipio();
@@ -42,11 +42,16 @@ public class MunicipioDao {
 		} catch (SQLException e) {
 			System.err.println("Deu ruim com a conexao com o db sql: " + e.getMessage());
 		} finally {
-			 if (!conexao.isClosed()) {
-				conexao.close();
+			if (conexao != null) {
+				if (!conexao.isClosed()) {
+					conexao.close();			
+				}
 			}
-			if (!stmt.isClosed()) {
-				stmt.close();
+			if (pStmt != null) {
+				if (!pStmt.isClosed()) {
+					pStmt.close();
+				}
+				
 			}
 		}
 		return lista;

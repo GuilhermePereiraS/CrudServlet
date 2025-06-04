@@ -18,19 +18,31 @@
   	<servlet-name>ServletAdiciona</servlet-name>
   	<servlet-class>cba.ifmt.servlets.AdicionaServlet</servlet-class>
   </servlet>
-    <servlet>
+  
+  <servlet>
   	<servlet-name>ServletConsulta</servlet-name>
   	<servlet-class>cba.ifmt.servlets.ConsultaServlet</servlet-class>
   </servlet>
-    <servlet>
+  
+  <servlet>
   	<servlet-name>ServletEdita</servlet-name>
   	<servlet-class>cba.ifmt.servlets.EditaServlet</servlet-class>
   </servlet>
-    <servlet>
+  
+  <servlet>
   	<servlet-name>ServletDeleta</servlet-name>
   	<servlet-class>cba.ifmt.servlets.DeletaServlet</servlet-class>
   </servlet>
   
+    <servlet>
+  	<servlet-name>EnviaMunicipiosServlet</servlet-name>
+  	<servlet-class>cba.ifmt.servlets.EnviaMunicipiosServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>EnviaMunicipiosServlet</servlet-name>
+  	<url-pattern>/enviaMunicipios</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ServletAdiciona</servlet-name>
   	<url-pattern>/adiciona</url-pattern>
