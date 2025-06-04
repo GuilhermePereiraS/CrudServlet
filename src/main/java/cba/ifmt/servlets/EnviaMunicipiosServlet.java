@@ -14,9 +14,7 @@ import cba.ifmt.DAO.MunicipioDao;
 public class EnviaMunicipiosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public EnviaMunicipiosServlet() {
         super();
         // TODO Auto-generated constructor stub

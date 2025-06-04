@@ -25,7 +25,7 @@ label {
 	  <label for="cpf">Cpf:</label>
 	  <input type="text" id="cpf" name="cpf" required><br>
 	
-	  <select>
+	  <select name="municipio">
 	  	<c:forEach var="municipios" items="${municipios}">
 	  		<option value="${municipios.nome}">${municipios.nome}</option>
 	  	</c:forEach>
