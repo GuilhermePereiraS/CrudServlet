@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 
 <style>
-label {
-	margin: 30px;
+label,input {
+	margin: 5px;
 }
 </style>
 </head>
@@ -25,11 +25,12 @@ label {
 	  <label for="cpf">Cpf:</label>
 	  <input type="text" id="cpf" name="cpf" required><br>
 	
+	  <label for="municipio">Municipio:</label>
 	  <select name="municipio">
 	  	<c:forEach var="municipios" items="${municipios}">
 	  		<option value="${municipios.nome}">${municipios.nome}</option>
 	  	</c:forEach>
-	  </select>
+	  </select><br>
 	
 	  <input type="submit" value="Adicionar">
 	</form>
