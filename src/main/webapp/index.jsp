@@ -4,6 +4,15 @@
 <head>
     <title>CRUD SERVLET/JSP</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        	ul {
+			list-style-type: none;
+		}
+		li {
+			padding: 20px;
+			font-size: 25px;
+		}
+    </style>
 </head>
 <body>
 	<div class="container">

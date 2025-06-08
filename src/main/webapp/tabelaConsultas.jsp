@@ -6,15 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Consulta de usuários</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 <style>
 
 table {
 	border-collapse: collapse;
+	background-color: #7da195;
+	border: solid 2px #b8dbd0;
 }
-tr,td {
-	border: 1px, solid;
+
+table::selection {
+	background-color: #769188
+}
+tr,td,th {
+	border: 2px, solid;
 	padding: 5px;
+	border-radius: 5px;
 }
+
 </style>
 </head>
 <body>

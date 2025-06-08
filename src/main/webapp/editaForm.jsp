@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Editar Usuário</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 <style>
 	form { padding: 10px;
 	}
@@ -14,8 +15,9 @@
 		margin: 5px;
 	}
 	
-	
-	
+	input::placeholder {
+		color:#d0dbd7;
+	}
 	
 </style>
 </head>
@@ -29,30 +31,15 @@
 	<c:if test="${mostrarDiv}"> 
 	  <div>
 	  <form action="atualiza" method="post">
-		    <input id="nomeEncontrado" name="nomeEncontrado" type="text" value="${usuario.nome}" readonly><button id="botaoNome" type=button onclick="removerTagReadonly('nomeEncontrado')">editar</button><br>
-		    <input id="email" type="text" name="email" value="${usuario.email}" readonly><button id="botaoEmail" type=button onclick="removerTagReadonly('email')">editar</button><br>
-		    <input id="cpf" type="text" name="cpf" value="${usuario.cpf}" readonly>	<button id="botaoCpf" type=button onclick="removerTagReadonly('cpf')">editar</button><br>
-		    <input id="municipio" type="text" name="municipio" value="${usuario.municipio.nome}" readonly><button id="botaoMunicipio" type=button onclick="removerTagReadonly('municipio')">editar</button><br>
+		    <input id="nomeEncontrado" name="nomeEncontrado" type="text" value="${usuario.nome}"><br>
+		    <input id="email" type="text" name="email" value="${usuario.email}" ><br>
+		    <input id="cpf" type="text" name="cpf" value="${usuario.cpf}" >	<br>
+		    <input id="municipio" type="text" name="municipio" value="${usuario.municipio.nome}" ><br>
 		    <input id="id" type="text" name="id" value="${usuario.id}" readonly><br>
 		   	<input type="submit" value="Concluir">
 	  </form>
 	  </div>
 	</c:if>
 
-<script type="text/javascript">
-function removerTagReadonly(idInput) {
-	input = document.getElementById(idInput);
-	if (!input.hasAttribute("readonly")) {
-		input.setAttribute("readonly",true)
-	} else {
-	input.removeAttribute("readonly");
-		
-	}
-	
-	
-}
-
-
-</script>
 </body>
 </html>
