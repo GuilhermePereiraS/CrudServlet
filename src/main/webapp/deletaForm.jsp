@@ -4,6 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+	input::placeholder {
+		color:#d0dbd7;
+	}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
