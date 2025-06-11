@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+body {
+	background-color: #464d48;
+	font-family: cursive;
+	color: #cfe3dc;
+	font-size: 25px;
+	
+}
+
+label {
+	cursor:text;
+}
+
+
+body::selection {
+	background-color: #414542;
+	color: #bbc9c5;
+
+}
+
+input[type="submit"] {
+	cursor: pointer;
+}
+
+input,select {
+	outline: none;
+	border: solid 2px #b8dbd0;
+	text-decoration: none;
+	font-size: 25px;
+	background-color: #7da195;
+	color: #d8e8e2;
+	border-radius: 5px;
+	transition: 0.15s;
+}
+
+
+input:hover,select:hover {
+	background-color: #67857b;
+}
+
+
+a {
+	background-color: #7da195;
+	color: #cfe3dc;
+	text-decoration: none;
+	border: solid 2px #b8dbd0;
+	padding: 8px;
+	border-radius: 5px;
+	font-size: 30px;
+	transition: 0.25s;
+}
+
+a:hover {
+	margin-left: 20px;
+	color: #bccfc8;
+}
+
+li {
+	margin-bottom: 7px;
+}
