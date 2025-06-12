@@ -12,7 +12,7 @@ public class MunicipioDao {
 	
 	
 	public List<Municipio> listaMunicipio() throws SQLException {
-		List<Municipio> lista = new ArrayList();
+		List<Municipio> lista = new ArrayList<>();
 
 		Connection conexao = null;
 		PreparedStatement pStmt = null;

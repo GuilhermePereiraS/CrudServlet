@@ -2,7 +2,6 @@ package cba.ifmt.ferramentas;
 
 import java.sql.SQLException;
 
-import cba.ifmt.DAO.MunicipioDao;
 import cba.ifmt.DAO.UsuarioDao;
 import cba.ifmt.entidades.Usuario;
 

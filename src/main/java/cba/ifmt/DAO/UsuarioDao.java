@@ -188,7 +188,7 @@ public class UsuarioDao {
 	} 
 	
 	public List<Usuario> listarTodos() throws SQLException {
-		List<Usuario> lista = new ArrayList();
+		List<Usuario> lista = new ArrayList<>();
 		
 		try {
 			Class.forName("org.postgresql.Driver");
