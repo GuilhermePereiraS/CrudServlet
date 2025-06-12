@@ -157,7 +157,7 @@ public class UsuarioDao {
 					"postgres", 
 					"guigui2006@"
 					);
-			String sql = "UPDATE usuarios SET nome=?, cpf=?, email=?, municipio_id=? WHERE  id=?";
+			String sql = "UPDATE usuarios SET nome=?, email=?, cpf=?, municipio_id=? WHERE  id=?";
 			pStmt = conexao.prepareStatement(sql);
 			
 			pStmt.setString(1, u.getNome());
